@@ -28,6 +28,8 @@
 
 # Makefile
 
+- [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
+
 ## What is Makefile?
 
 A makefile is a special file, containing shell commands, that you create and name makefile while in the directory containing this makefile, you will type `make` and the commands in the makefile will be executed.
