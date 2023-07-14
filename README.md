@@ -30,7 +30,7 @@
 
 ## What is Makefile?
 
-A makefile is a special file, containing shell commands, that you create and name makefile while in the directory containing this makefile, you will type make and the commands in the makefile will be executed.
+A makefile is a special file, containing shell commands, that you create and name makefile while in the directory containing this makefile, you will type `make` and the commands in the makefile will be executed.
 
 ## How to use
 `make` or `make status` -> hw-status <br />
