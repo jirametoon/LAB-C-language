@@ -115,10 +115,7 @@ int	main(void)
 			find_row_char(maze, size, 'G'), find_col_char(maze, size, 'G'));
 	}
 	else
-	{
-		print_maze(maze, size);
 		printf("There is no path to walk to 'G' position (;-;)\n");
-	}
 	for (int i = 0; i < size; i++)
 		free(maze[i]);
 	free(maze);
