@@ -1,6 +1,8 @@
-.PHONY: all *.c clean
+.PHONY: status all * clean
 
 SRCS	:= ${wildcard *.c}
+
+NAME	:= ${SRCS:%.c=%}
 
 CC	:= gcc
 
@@ -10,9 +12,16 @@ OUT	:= a.out
 
 RUN	:= ./a.out
 
-CFLAGS  := -Wall -Wextra -Werror
+STA	:= hw-status --all
 
-all: ${SRCS}
+SEN	:= hw-send
+
+CFLAGS	:= -Wall -Wextra -Werror
+
+status:
+	@${STA}
+
+all:	${SRCS}
 
 ${SRCS}:
 	@echo "Running $@ ..."
@@ -21,5 +30,8 @@ ${SRCS}:
 	@${RM} ${OUT}
 	@echo "=============================="
 
+${NAME}:
+	@${SEN} $@ ${@:%=%.c}
+
 clean:
-	${RM} ${OUT}
+	@${RM} ${OUT}

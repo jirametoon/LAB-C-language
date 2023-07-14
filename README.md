@@ -1,8 +1,4 @@
-<div align="center">
-
 # LAB C language
-
-</div>
 
 ## [lab01](https://github.com/jirametoon/LAB-C-KU/tree/main/lab01)
 
@@ -29,3 +25,16 @@
 - [mazeNb.c](https://github.com/jirametoon/LAB-C-KU/tree/main/lab03/mazeNb.c)
 - [stats.c](https://github.com/jirametoon/LAB-C-KU/tree/main/lab03/stats.c)
 - [test.txt](https://github.com/jirametoon/LAB-C-KU/blob/main/lab03/test.txt)
+
+# Makefile
+
+## What is Makefile?
+
+A makefile is a special file, containing shell commands, that you create and name makefile while in the directory containing this makefile, you will type make and the commands in the makefile will be executed.
+
+## How to use
+`make` or `make status` -> hw-status <br />
+`make [NAME OF C FILE]` -> compile C file Ex: "make helloWorld.c" <br />
+`make all` -> compile all C files <br />
+`make [NAME OF C FILE WITHOUT .c]` -> hw-send C file Ex: "make helloWorld" <br />
+`make clean` -> delete a.out <br />

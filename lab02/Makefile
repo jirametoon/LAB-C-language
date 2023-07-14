@@ -8,7 +8,7 @@ RM	:= rm -rf
 
 OUT	:= a.out
 
-RUN	:= ./${OUT}
+RUN	:= ./a.out
 
 CFLAGS  := -Wall -Wextra -Werror
 
