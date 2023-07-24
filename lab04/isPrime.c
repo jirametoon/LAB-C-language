@@ -21,7 +21,9 @@ int	main(void)
 	return (0);
 }
 
-/*	
-	1 + 1 + sqrt(n)/2
-	O(1) + O(1) + O(sqrt(n)) = O(sqrt(n))
-*/
+/*
+ *	1 + 1 + sqrt(n)/2
+ *	O(1) + O(1) + O(sqrt(n)) = O(sqrt(n))
+ */
+
+// O(sqrt(n))
