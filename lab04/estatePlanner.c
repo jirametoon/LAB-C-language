@@ -1,40 +1,28 @@
 #include <stdio.h>
-#include <math.h>
 
-int	last_num(int row, int col)
+int	last_num(int num)
 {
-	int	num;
+	int	lnum;
 
-	if (row <= col)
-		for (float i = 0.0; pow(2.0, i) <= row; i++)
-			num = pow(2.0, i); // O(lgn)
-	else
-		for (float i = 0.0; pow(2.0, i) <= col; i++)
-			num = pow(2.0, i); // O(lgn)
-	return (num);
+	lnum = 0;
+	for (int i = 1; i <= num; i *= 2)
+		lnum = i;
+	return (lnum);
 }
-
 
 int	estatePlanner(int row, int col)
 {
-	int	num;
+	int	lnum;
 
-	num = last_num(row, col);
-	if (row == 0 || col == 0)
+	if (row > col)
+		return (estatePlanner(col, row));
+	lnum = last_num(row);
+	if (!row)
 		return (0);
-	else if (row != num && col != num)
-		return (estatePlanner(row - num, col) + estatePlanner(col - num, num) + 1);
-	else if (row != num)
-		return (estatePlanner(row - num, col) + 1);
-	else if (col != num)
-		return (estatePlanner(row, col - num) + 1);
+	else if (row == lnum && !(col % lnum))
+		return (col / lnum);
 	else
-	{
-		if (row < col)
-			return (col / num);
-		else
-			return (row / num);
-	}
+		return (estatePlanner(row - lnum, col) + estatePlanner(lnum, col - lnum) + 1);
 }
 
 int	main(void)
@@ -46,10 +34,10 @@ int	main(void)
 	return (0);
 }
 
-/* 
- * T(min(row, col))	-> O(1) + O(lg(min(row, col)))								(row == 0 || col == 0)
- * 			-> O(lg(min(row, col))) + T(min(row - num, col)) + T(min(col - num, num)) + O(1)	(row != num && col != num)
- * 			-> O(lg(min(row, col))) + T(min(row - num), col) + O(1)					(row != num)
- * 			-> O(lg(min(row, col))) + T(min(row, col - num)) + O(1)					(col != num)
- * 			-> O(lg(min(row, col))) + O(1)								otherwise
+/*
+ * T(row, col) = T(row - lnum, col) + T(lnum, col - lnum) + 1
+ * lnum = O(log(min(row, col)))
+ * T(row, col) = O(log(row)) * O(log(col))
  */
+
+// O(log(n))
