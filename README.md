@@ -26,6 +26,12 @@
 - [stats.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab03/stats.c)
 - [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab03/test.txt)
 
+## [lab04](https://github.com/jirametoon/LAB-C-language/tree/main/lab04)
+
+- [isPrime.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab04/isPrime.c)
+- [estatePlanner.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab04/estatePlanner.c)
+- [test.txt]((https://github.com/jirametoon/LAB-C-language/blob/main/lab04/test.txt)
+
 # Makefile
 
 - [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
