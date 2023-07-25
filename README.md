@@ -30,7 +30,7 @@
 
 - [isPrime.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab04/isPrime.c)
 - [estatePlanner.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab04/estatePlanner.c)
-- [test.txt]((https://github.com/jirametoon/LAB-C-language/blob/main/lab04/test.txt)
+- [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab04/test.txt)
 
 # Makefile
 
