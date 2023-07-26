@@ -4,7 +4,7 @@
 typedef struct	player
 {
 	int		no;		// player number
-	int		shot;		// ืamount of alcohol
+	int		shot;		// amount of alcohol
 	int		status;		// win or out
 	struct player	*next;
 } player_t;
