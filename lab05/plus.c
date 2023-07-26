@@ -30,47 +30,43 @@ int	*getNUM(int *size)
 
 int	*plus(num_t *num)
 {
-	int	*res;
-	int	max, min, n;
+	int	*res, *min, *max;
+	int	size_max, size_min, n;
 
 	if (num -> size_x < num -> size_y)
 	{
-		max = num -> size_y;
-		min = num -> size_x;
+		size_max = num -> size_y;
+		size_min = num -> size_x;
+		max = num -> y;
+		min = num -> x;
 	}
 	else
 	{
-		max = num -> size_x;
-		min = num -> size_y;
+		size_max = num -> size_x;
+		size_min = num -> size_y;
+		max = num -> x; 
+		min = num -> y;
 	}
-	res = (int *)malloc(sizeof(int) * max);
+	res = (int *)malloc(sizeof(int) * size_max);
 	n = 0;
-	for (int i = 1; i <= min; i++)
+	for (int i = 1; i <= size_min; i++)
 	{
-		res[i - 1] = (num -> x[(num -> size_x) - i] + num -> y[(num -> size_y) - i] + n) % 10;
-		n = (num -> x[(num -> size_x) - i] + num -> y[(num -> size_y) - i] + n) / 10;
+		res[i - 1] = (min[size_min - i] + max[size_max - i] + n) % 10;
+		n = (min[size_min - i] + max[size_max - i] + n) / 10;
 	}
-	for (int i = min + 1; i <= max; i++)
+	for (int i = size_min + 1; i <= size_max; i++)
 	{
-		if (num -> size_x < num -> size_y)
-		{
-			res[i - 1] = (num -> y[(num -> size_y) - i] + n) % 10;
-			n = (num -> y[(num -> size_y) - i] + n) / 10;
-		}
-		else
-		{
-			res[i - 1] = (num -> x[(num -> size_x) - i] + n) % 10;
-			n = (num -> x[(num -> size_x) - i] + n) / 10;
-		}
+		res[i - 1] = (max[size_max - i] + n) % 10;
+		n = (max[size_max - i] + n) / 10;
 	}
 	if (n)
 	{
-		res = (int *)realloc(res, sizeof(int) * (max + 1));
-		res[max] = n;
-		num -> size_res = max + 1;
+		res = (int *)realloc(res, sizeof(int) * (size_max + 1));
+		res[size_max] = n;
+		num -> size_res = size_max + 1;
 	}
 	else
-		num -> size_res = max;
+		num -> size_res = size_max;
 	return (res);
 }
 
