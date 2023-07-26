@@ -19,11 +19,19 @@ int	*getNUM(int *size)
 	num = (int *)malloc(sizeof(int));
 	while ((c = getchar()) != '\n')
 	{
-		num = (int *)realloc(num, sizeof(int) * (*size + 1));
-		if (!num)
-			return (0);
-		num[*size] = c - '0';
-		(*size)++;
+		if (!((c >= '0' && c <= '9') || (c >= '\t' && c <= '\r') || c == ' '))
+		{
+			*size = 0;
+			break ;
+		}
+		if (c >= '0' && c <= '9')
+		{
+			num = (int *)realloc(num, sizeof(int) * (*size + 1));
+			if (!num)
+				return (0);
+			num[*size] = c - '0';
+			(*size)++;
+		}
 	}
 	return (num);
 }
@@ -78,6 +86,13 @@ int	main(void)
 	num.size_y = 0;
 	num.x = getNUM(&num.size_x);
 	num.y = getNUM(&num.size_y);
+	if (!num.size_x || !num.size_y)
+	{
+		free(num.x);
+		free(num.y);
+		printf("Error\n");
+		return (1);
+	}
 	num.res = plus(&num);
 	for (int i = 1; i <= num.size_res; i++)
 		printf("%d", num.res[num.size_res - i]);
