@@ -32,6 +32,10 @@
 - [estatePlanner.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab04/estatePlanner.c)
 - [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab04/test.txt)
 
+## [lab05](https://github.com/jirametoon/LAB-C-language/tree/main/lab05)
+- [datetime.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab05/datetime.c)
+- [plus.c](https://github.com/jirametoon/LAB-C-language/tree/main/lab05/plus.c)
+
 # Makefile
 
 - [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
