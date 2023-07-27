@@ -22,6 +22,20 @@ void	show(player_t *player)
 	}
 }
 
+void	show_player(player_t *player, int count)
+{
+	player_t *node;
+	
+	node = player;
+	while (node)
+	{
+		printf("count : %d\n", count);
+		printf("%d : %d\n", node -> no, node -> shot);
+		node = node -> next;
+	}
+	printf("---------------------\n");
+}
+
 void	free_node(player_t *player)
 {
 	player_t	*node;
@@ -67,6 +81,8 @@ player_t	*create_players(player_t *player, int n)
 	for (int i = 1; i <= n; i++)
 	{
 		tmp = (player_t *)malloc(sizeof(player_t));
+		if (!tmp)
+			break ;
 		tmp -> next = NULL;
 		tmp -> no = i;
 		scanf("%d", &tmp -> shot);
@@ -104,6 +120,17 @@ int	check_player(player_t *player)
 	return (0);
 }
 
+int check_number(int count, int k)
+{
+	while (count)
+	{
+		if (count % 10 == k)
+			return (1);
+		count /= 10;
+	}
+	return (0);
+}
+
 int	countGame(player_t *player, int k)
 {
 	player_t	*node;
@@ -117,10 +144,11 @@ int	countGame(player_t *player, int k)
 			node = player;
 		else if (node -> status)
 		{
-			if (!(count % k))
+			if (!(count % k) || check_number(count, k))
 				node -> shot--;
 			if (node -> shot < 0)
 				node -> status--;
+			//show_player(player, count);
 			count++;
 			node = node -> next;
 		}
