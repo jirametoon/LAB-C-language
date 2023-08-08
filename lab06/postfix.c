@@ -87,9 +87,15 @@ int	main(void)
 				}
 		}
 		if (s && !(s -> next))
+		{
 				printf("%.2f\n", s -> value);
+				free(s);
+		}
 		else if (s -> next)
+		{
 			printf("Error\n");
+			free_stack(s);
+		}
 		else
 				printf("0.00\n");
 		return (0);
