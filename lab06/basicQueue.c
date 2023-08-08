@@ -39,18 +39,15 @@ queue_t	*dequeue(queue_t *q)
 
 void	show(queue_t *q)
 {
-		node_t	*node;
-
-		node = q;
-		if (!node)
+		if (!q)
 				printf("Queue is empty.\n");
 		else
 		{
-				printf("%d", node -> data);
-				while (node -> next)
+				printf("%d", q -> data);
+				while (q -> next)
 				{
-						node = node -> next;
-						printf(" %d", node -> data);
+						q = q -> next;
+						printf(" %d", q -> data);
 				}
 				printf("\n");
 		}
@@ -66,14 +63,12 @@ void	empty(queue_t *q)
 
 void	size(queue_t *q)
 {
-		node_t	*node;
 		int		size;
 
-		node = q;
 		size = 0;
-		while (node)
+		while (q)
 		{
-				node = node -> next;
+				q = q -> next;
 				size++;
 		}
 		printf("%d\n", size);
