@@ -8,7 +8,6 @@
 - [timeConverter.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab01/timeConverter.c)
 - [trapezoid.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab01/trapezoid.c)
 - [waiting.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab01/waiting.c)
-- [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab01/test.txt)
 
 ## [lab02](https://github.com/jirametoon/LAB-C-language/tree/main/lab02)
 
@@ -16,7 +15,6 @@
 - [calendar.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab02/calendar.c)
 - [romanNum.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab02/romanNum.c)
 - [strongNum.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab02/strongNum.c)
-- [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab02/test.txt)
 
 ## [lab03](https://github.com/jirametoon/LAB-C-language/tree/main/lab03)
 
@@ -24,13 +22,11 @@
 - [maze.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab03/maze.c)
 - [mazeNb.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab03/mazeNb.c)
 - [stats.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab03/stats.c)
-- [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab03/test.txt)
 
 ## [lab04](https://github.com/jirametoon/LAB-C-language/tree/main/lab04)
 
 - [isPrime.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab04/isPrime.c)
 - [estatePlanner.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab04/estatePlanner.c)
-- [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab04/test.txt)
 
 ## [lab05](https://github.com/jirametoon/LAB-C-language/tree/main/lab05)
 
@@ -38,7 +34,14 @@
 - [plus.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab05/plus.c)
 - [basicList.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab05/basicList.c)
 - [countGame.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab05/countGame.c)
-- [test.txt](https://github.com/jirametoon/LAB-C-language/blob/main/lab05/test.txt)
+
+## [lab06](https://github.com/jirametoon/LAB-C-language/tree/main/lab06)
+
+- [basicQueue.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab06/basicQueue.c)
+- [basicStack.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab06/basicStack.c)
+- [hardPassword.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab06/hardPassword.c)
+- [parenthesis.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab06/parenthesis.c)
+- [postfix.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab06/postfix.c)
 
 # Makefile
 
