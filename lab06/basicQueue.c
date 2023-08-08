@@ -9,6 +9,8 @@ typedef struct	node
 
 typedef node_t queue_t;
 
+queue_t *rear = NULL;
+
 queue_t	*enqueue(queue_t *q, int value)
 {
 		node_t	*node;
@@ -17,8 +19,18 @@ queue_t	*enqueue(queue_t *q, int value)
 		if (!node)
 				return (q);
 		node -> data = value;
-		node -> next = q;
-		return (node);
+		node -> next = NULL;
+		if (!q)
+		{
+			q = node;
+			rear = node;
+		}
+		else
+		{
+			rear -> next = node;
+			rear = node;
+		}
+		return (q);
 }
 
 queue_t	*dequeue(queue_t *q)
