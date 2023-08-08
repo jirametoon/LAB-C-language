@@ -51,14 +51,12 @@ void	empty(stack_t *s)
 
 void	size(stack_t *s)
 {
-		node_t	*node;
 		int		size;
 
-		node = s;
 		size = 0;
-		while (node)
+		while (s)
 		{
-				node = node -> next;
+				s = s -> next;
 				size++;
 		}
 		printf("%d\n", size);
