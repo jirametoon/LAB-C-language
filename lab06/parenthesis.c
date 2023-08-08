@@ -9,6 +9,18 @@ typedef struct	node
 
 typedef node_t	stack_t;
 
+void	free_stack(stack_t *s)
+{
+	node_t	*node;
+
+	while (s)
+	{
+		node = s;
+		s = s -> next;
+		free(node);
+	}
+}
+
 void	push(stack_t **s, char value)
 {
 		node_t	*node;
@@ -28,7 +40,10 @@ void	pop(stack_t **s)
 
 		node = *s;
 		if (node)
+		{
 				*s = (*s) -> next;
+				free(node);
+		}
 }
 
 int	check_paren(stack_t *s, char value)
@@ -62,6 +77,9 @@ int	main(void)
 		if (!s)
 				printf("1\n");
 		else
+		{
 				printf("0\n");
+				free_stack(s);
+		}
 		return (0);
 }
