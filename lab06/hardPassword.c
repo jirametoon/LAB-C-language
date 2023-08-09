@@ -60,6 +60,7 @@ queue_t	*enqueue(queue_t *q, char c)
 
 int	check_password(stack_t *s, queue_t *q)
 {
+		s = s -> next;
 		while (s && q)
 		{
 				if (s -> data != q -> data)
@@ -89,8 +90,10 @@ int	main(void)
 		c = 0;
 		while ((c = getchar()) != 'x')
 				s = push(s, c);
+		s = push(s, 'x');
 		while ((c = getchar()) != 'y')
 				q = enqueue(q, c);
+		q = enqueue(q, 'y');
 		//show(s);
 		//show(q);
 		printf("%d\n", check_password(s, q));
