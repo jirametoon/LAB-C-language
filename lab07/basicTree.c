@@ -32,7 +32,7 @@ tree_t	*find(tree_t *t, int node)
 		pos = find(t -> first_child, node);
 		if (!pos)
 				return (find(t -> next_sibling, node));
-		return (t);
+		return (pos);
 }
 
 tree_t	*last_tree(tree_t *t)
@@ -53,7 +53,7 @@ tree_t	*attach(tree_t *t, int parent, int child)
 	
 	pos = find(t, parent);
 	if (!pos)
-			return (NULL);
+			return (t);
 	pos = pos -> first_child;
 	tmp = malloc(sizeof(tree_t));
 	tmp -> value = child;
@@ -84,7 +84,9 @@ int	search(tree_t *t, int node)
 		tree_t *pos;
 
 		pos = find(t, node);
-		return (pos ? 1 : 0);
+		if (pos)
+				return (1);
+		return (0);
 }
 
 int	degree(tree_t *t, int node)
@@ -94,7 +96,7 @@ int	degree(tree_t *t, int node)
 
 		pos = find(t,  node) -> first_child;
 		count = 0;
-		while (pos -> next_sibling)
+		while (pos)
 		{
 				pos = pos -> next_sibling;
 				count++;
@@ -104,7 +106,7 @@ int	degree(tree_t *t, int node)
 
 int	is_root(tree_t *t, int node)
 {
-		return (t -> value == node)
+		return (t -> value == node);
 }
 
 int	is_leaf(tree_t *t, int node)
@@ -127,8 +129,11 @@ void	siblings(tree_t *t, int	node)
 						tmp = tmp -> next_sibling;
 				tmp = pos -> first_child;
 		}
-		printf("%d", pos -> value);
-		pos = pos -> next_sibling;
+		if (tmp && pos)
+		{
+			printf("%d", pos -> value);
+			pos = pos -> next_sibling;
+		}
 		while (tmp && pos)
 		{
 				printf(" %d", pos -> value);
@@ -141,7 +146,7 @@ int	depth(tree_t *t, int node)
 		tree_t *pos;
 		int		count;
 
-		pos = t;
+		pos = find(t, node);
 		count = -1;
 		while (pos -> first_child)
 		{
@@ -154,6 +159,7 @@ int	depth(tree_t *t, int node)
 void	print_path(tree_t *t, int start, int end)
 {
 
+}
 int	main(void)
 {
 		tree_t	*t = NULL;		
