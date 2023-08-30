@@ -20,15 +20,15 @@ void	findStats(int n, int *nums, double *avg, int *maxi, int *mini)
 }
 
 int	main() {
-	int	n, i, maxi, mini;
+	int	n, maxi, mini;
 	double	avg;
 	int	*nums;
 
-	nums = (int *)malloc(sizeof (int) *n);
 	scanf("%d", &n);
-	for (i=0; i<n; i++)
+	nums = (int *)malloc(sizeof (int) *n);
+	for (int i=0; i<n; i++)
 		scanf("%d", nums+i);
 	findStats(n, nums, &avg, &maxi, &mini);
-	printf("%.2f %d %d", avg, maxi, mini);
+	printf("%.2f %d %d\n", avg, maxi, mini);
 	return 0;
 }

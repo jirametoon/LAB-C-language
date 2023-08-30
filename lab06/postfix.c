@@ -7,9 +7,9 @@ typedef struct	node
 	struct node	*next;
 }node_t;
 
-typedef node_t	stack_t;
+typedef node_t	s_stack_t;
 
-void	free_stack(stack_t *s)
+void	free_stack(s_stack_t *s)
 {
 		node_t	*node;
 
@@ -21,7 +21,7 @@ void	free_stack(stack_t *s)
 		}
 }
 
-void	push(stack_t **s, char c)
+void	push(s_stack_t **s, char c)
 {
 		node_t	*node;
 
@@ -34,7 +34,7 @@ void	push(stack_t **s, char c)
 		}
 }
 
-void	operate(stack_t **s, char c)
+void	operate(s_stack_t **s, char c)
 {
 		node_t	*node;
 
@@ -67,7 +67,7 @@ void	operate(stack_t **s, char c)
 
 int	main(void)
 {
-		stack_t	*s = NULL;
+		s_stack_t	*s = NULL;
 		int		size;
 		char	c;
 

@@ -7,9 +7,9 @@ typedef struct	node
 	struct node	*next;
 }node_t;
 
-typedef node_t stack_t;
+typedef	node_t	s_stack_t;
 
-stack_t	*push(stack_t *s, int value)
+s_stack_t	*push(s_stack_t *s, int value)
 {
 		node_t *node;
 
@@ -22,7 +22,7 @@ stack_t	*push(stack_t *s, int value)
 		return (s);
 }
 
-void	top(stack_t *s)
+void	top(s_stack_t *s)
 {
 		if (s)
 				printf("%d\n", s -> data);
@@ -30,7 +30,7 @@ void	top(stack_t *s)
 				printf("Stack is empty.\n");
 }
 
-stack_t	*pop(stack_t *s)
+s_stack_t	*pop(s_stack_t *s)
 {
 		node_t	*node;
 
@@ -41,7 +41,7 @@ stack_t	*pop(stack_t *s)
 		return (s);
 }
 
-void	empty(stack_t *s)
+void	empty(s_stack_t *s)
 {
 		if (s)
 				printf("Stack is not empty.\n");
@@ -49,7 +49,7 @@ void	empty(stack_t *s)
 				printf("Stack is empty.\n");
 }
 
-void	size(stack_t *s)
+void	size(s_stack_t *s)
 {
 		int		size;
 
@@ -64,7 +64,7 @@ void	size(stack_t *s)
 
 int	main(void)
 {
-		stack_t	*s = NULL;
+		s_stack_t	*s = NULL;
 		int		n, i, command, value;
 		
 		scanf("%d", &n);

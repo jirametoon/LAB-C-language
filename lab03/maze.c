@@ -110,9 +110,7 @@ int	main(void)
 	else if (traverseMaze(maze, size, find_row_char(maze, size, 'S'), find_col_char(maze, size, 'S')))
 	{
 		print_maze(maze, size);
-		//printf("There is the way to walk from S(%d, %d) to G(%d, %d) (^-^)\n", \
-			find_row_char(maze, size, 'S'), find_col_char(maze, size, 'S'), \
-			find_row_char(maze, size, 'G'), find_col_char(maze, size, 'G'));
+		//printf("There is the way to walk from S(%d, %d) to G(%d, %d) (^-^)\n", find_row_char(maze, size, 'S'), find_col_char(maze, size, 'S'), find_row_char(maze, size, 'G'), find_col_char(maze, size, 'G'));
 	}
 	else
 		printf("There is no path to walk to 'G' position (;-;)\n");

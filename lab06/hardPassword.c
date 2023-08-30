@@ -7,7 +7,7 @@ typedef struct	node
 	struct node	*next;
 }node_t;
 
-typedef node_t	stack_t;
+typedef node_t	s_stack_t;
 typedef node_t	queue_t;
 
 queue_t *rear = NULL;
@@ -24,7 +24,7 @@ void	free_all(node_t *node)
 		}
 }
 
-stack_t	*push(stack_t *s, char c)
+s_stack_t	*push(s_stack_t *s, char c)
 {
 		node_t	*node;
 
@@ -58,7 +58,7 @@ queue_t	*enqueue(queue_t *q, char c)
 		return (q);
 }
 
-int	check_password(stack_t *s, queue_t *q)
+int	check_password(s_stack_t *s, queue_t *q)
 {
 		s = s -> next;
 		while (s && q)
@@ -83,7 +83,7 @@ void	show(node_t *node)
 
 int	main(void)
 {
-		stack_t	*s = NULL;
+		s_stack_t	*s = NULL;
 		queue_t	*q = NULL;
 		char	c;
 
