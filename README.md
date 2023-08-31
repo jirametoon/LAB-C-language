@@ -43,6 +43,10 @@
 - [parenthesis.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab06/parenthesis.c)
 - [postfix.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab06/postfix.c)
 
+## [lab07](https://github.com/jirametoon/LAB-C-language/tree/main/lab07)
+
+- [basicTree.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab07/basicTree.c)
+
 # Makefile
 
 - [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
