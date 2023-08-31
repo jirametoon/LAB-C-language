@@ -35,6 +35,20 @@ tree_t	*find(tree_t *t, int node)
 		return (pos);
 }
 
+tree_t *last_sibling(tree_t *t)
+{
+	while (t -> next_sibling)
+		t = t -> next_sibling;
+	return (t);
+}
+
+tree_t *last_child(tree_t *t)
+{
+	while (t -> first_child)
+		t = t -> first_child;
+	return (t);
+}
+
 tree_t	*last_tree(tree_t *t)
 {
 		tree_t	*pos;
