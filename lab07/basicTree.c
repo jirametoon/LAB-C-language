@@ -51,7 +51,7 @@ void	enqueue(queue_t **front, queue_t **rear, int value)
 	}
 }
 
-void	dequeue(queue_t	**front)
+tree_t	dequeue(queue_t	*front)
 {
 	queue_t	*node;
 
@@ -77,9 +77,10 @@ tree_t	*find_node(tree_t *t, int node)
 	return (pos);
 }
 
+
 tree_t	*attach(tree_t *t, int parent, int child)
 {
-	tree_t	*pos, *tmp;
+	tree_t	*pos, *node;
 
 	if (parent != -1 && !t)
 		return (NULL);
@@ -96,12 +97,12 @@ tree_t	*attach(tree_t *t, int parent, int child)
 	pos = find_node(t, parent);
 	if (!pos)
 		return (t);
-	tmp = malloc(sizeof(tree_t));
+	node = malloc(sizeof(tree_t));
 	if (!tmp)
 		return (t);
-	tmp -> value = child;
-	tmp -> next_sibling = NULL;
-	tmp -> first_child = NULL;
+	node -> value = child;
+	node -> next_sibling = NULL;
+	node -> first_child = NULL;
 	if (!pos -> first_child)
 		pos -> first_child = tmp;
 	else
@@ -109,7 +110,7 @@ tree_t	*attach(tree_t *t, int parent, int child)
 		pos = pos -> first_child;
 		while (pos -> next_sibling)
 			pos = pos -> next_sibling;
-		pos -> next_sibling = tmp;
+		pos -> next_sibling = node;
 	}
 	return (t);
 }
@@ -252,6 +253,32 @@ int	path_length(tree_t *t, int start, int end)
 	return (count);
 }
 
+void	ancestor(tree_t *t, int node)
+{
+	if (t && search(t, node))
+	{
+		while (search(t, node))
+		{
+			if (t -> value == node)
+			{
+				printf("%d\n", node);
+				t = NULL;
+			}
+			else if (search(t -> first_child, node))
+			{
+				printf("%d ", t -> value);
+				t = t -> first_child;
+			}
+			else
+				t = t -> next_sibling;
+		}
+	}
+}
+
+void	bfs(t)
+{
+}
+
 int	main(void)
 {
 	tree_t	*t = NULL;		
@@ -274,7 +301,7 @@ int	main(void)
 			//case 8: scanf("%d", &node); printf("%d\n", depth(t, node)); break;
 			case 9: scanf("%d %d", &start, &end); print_path(t, start, end); break;
 			case 10: scanf("%d %d", &start, &end); printf("%d\n", path_length(t, start, end)); break;
-			//case 11: scanf("%d", &node); ancestor(t, node); break;
+			case 11: scanf("%d", &node); ancestor(t, node); break;
 			//case 12: scanf("%d", &node); descendant(t, node); break;
 			//case 13: bfs(t); break;
 			//case 14: dfs(t); break;
