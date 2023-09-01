@@ -29,8 +29,39 @@ typedef node_tree_t	tree_t;
 typedef	node_t		s_stack_t;
 typedef node_t		queue_t;
 
-queue_t	*front = NULL;
-queue_t	*rear = NULL;
+void	enqueue(queue_t **front, queue_t **rear, int value)
+{
+	queue_t	*node;
+
+	node = malloc(sizeof(queue_t));
+	if (node)
+	{
+		node -> value = value;
+		node -> next = NULL;
+		if (!*front)
+		{
+			*front = node;
+			*rear = node;
+		}
+		else
+		{
+			(*rear) -> next = node;
+			*rear = (*rear) -> next;
+		}
+	}
+}
+
+void	dequeue(queue_t	**front)
+{
+	queue_t	*node;
+
+	node = *front;
+	if (node)
+	{
+		*front = (*front) -> next;
+		free(node);
+	}
+}
 
 tree_t	*find_node(tree_t *t, int node)
 {
@@ -44,20 +75,6 @@ tree_t	*find_node(tree_t *t, int node)
 	if (!pos)
 		return (find_node(t -> next_sibling, node));
 	return (pos);
-}
-
-tree_t	*last_child(tree_t *t)
-{
-	while (t -> first_child)
-		t = t -> first_child;
-	return (t);
-}
-
-tree_t	*last_sibling(tree_t *t)
-{
-	while (t -> next_sibling)
-		t = t -> next_sibling;
-	return (t);
 }
 
 tree_t	*attach(tree_t *t, int parent, int child)
@@ -148,16 +165,25 @@ int	is_leaf(tree_t *t, int node)
 void	siblings(tree_t *t, int node)
 {
 	tree_t	*first = t;
+	int		i = 1;
 
 	while (search(t, node))
 	{
 		if (t -> value == node)
 		{
-			printf("%d", first -> value);
-			while (first -> next_sibling)
+			while (first)
 			{
+				if (first -> value != node)
+				{
+					if (i)
+					{
+						printf("%d", first -> value);
+						i = 0;
+					}
+					else
+						printf(" %d", first -> value);
+				}
 				first = first -> next_sibling;
-				printf(" %d", first -> value);
 			}
 			printf("\n");
 			t = NULL;
@@ -172,11 +198,65 @@ void	siblings(tree_t *t, int node)
 	}
 }
 
+/*
+int	depth(tree_t *t, int node)
+{
+
+}	
+*/
+
+void	print_path(tree_t *t, int start, int end)
+{
+	tree_t	*tmp = find_node(t, start);
+
+	t = tmp;
+	if (tmp && search(tmp, end))
+	{
+		while (search(t, end))
+		{
+			if (tmp -> value == end)
+			{
+				printf("%d\n", end);
+				t = NULL;
+			}
+			else if (search(tmp -> first_child, end))
+			{
+				printf("%d ", tmp -> value);
+				tmp = tmp -> first_child;
+			}
+			else
+				tmp = tmp -> next_sibling;
+		}
+	}
+}
+
+int	path_length(tree_t *t, int start, int end)
+{
+	tree_t	*tmp = find_node(t, start);
+	int		count = 1;
+
+	if (!(tmp && search(tmp, end)))
+		return (0);
+	while (search(t, end))
+	{
+		if (tmp -> value == end)
+			t = NULL;
+		else if (search(tmp -> first_child, end))
+		{
+			count++;
+			tmp = tmp -> first_child;
+		}
+		else
+			tmp = tmp -> next_sibling;
+	}
+	return (count);
+}
+
 int	main(void)
 {
 	tree_t	*t = NULL;		
 	int		n, i, command;
-	int		parent, child, node/*, start, end*/;
+	int		parent, child, node, start, end;
 
 	scanf("%d", &n);
 	for (i=0; i<n; i++)
@@ -192,8 +272,8 @@ int	main(void)
 			case 6: scanf("%d", &node); printf("%d\n", is_leaf(t, node)); break;
 			case 7: scanf("%d", &node); siblings(t, node); break;
 			//case 8: scanf("%d", &node); printf("%d\n", depth(t, node)); break;
-			//case 9: scanf("%d %d", &start, &end); print_path(t, start, end); break;
-			//case 10: scanf("%d %d", &start, &end); printf("%d\n", path_length(t, start, end)); break;
+			case 9: scanf("%d %d", &start, &end); print_path(t, start, end); break;
+			case 10: scanf("%d %d", &start, &end); printf("%d\n", path_length(t, start, end)); break;
 			//case 11: scanf("%d", &node); ancestor(t, node); break;
 			//case 12: scanf("%d", &node); descendant(t, node); break;
 			//case 13: bfs(t); break;
