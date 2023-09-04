@@ -1,312 +1,414 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// You can define your own (one or more)
-// structures here. However, we eventually
-// need the data type "tree_t".
-// For example:
-// typedef struct node {
-// ...
-// } node_t;
-// typedef node_t tree_t;
-// Write your code here
-// ...
-
-typedef	struct	node_tree
+typedef struct	tree
 {
-	int					value;
-	struct	node_tree	*next_sibling;
-	struct	node_tree	*first_child;
-}node_tree_t;
+	int		value;
+	int		level;
+	struct tree	*next_sibling;
+	struct tree 	*first_child;
+}tree_t;
 
-typedef struct	node
+typedef struct	stack
 {
-		int			value;
-		struct node	*next;
-}node_t;
+	int 		value;
+	struct stack 	*next;
+}s_stack_t;
 
-typedef node_tree_t	tree_t;	
-typedef	node_t		s_stack_t;
-typedef node_t		queue_t;
-
-void	enqueue(queue_t **front, queue_t **rear, int value)
+typedef struct queue
 {
-	queue_t	*node;
+	tree_t		*node_t;
+	struct queue	*next;
+}queue_t;
 
-	node = malloc(sizeof(queue_t));
-	if (node)
+queue_t	*enqueue(queue_t **q, tree_t *t)
+{
+	queue_t	*node = malloc(sizeof(queue_t));
+
+	node -> node_t = t;
+	node -> next = NULL;
+	if (!*q)
+		return (node);
+	else
 	{
-		node -> value = value;
-		node -> next = NULL;
-		if (!*front)
-		{
-			*front = node;
-			*rear = node;
-		}
-		else
-		{
-			(*rear) -> next = node;
-			*rear = (*rear) -> next;
-		}
+		queue_t	*tmp = *q;
+		while(tmp -> next)
+			tmp = tmp -> next;
+		tmp -> next = node;
 	}
+	return (*q);
 }
 
-tree_t	dequeue(queue_t	*front)
+void	dequeue(queue_t **q)
 {
-	queue_t	*node;
+	queue_t	*tmp = *q;
 
-	node = *front;
-	if (node)
-	{
-		*front = (*front) -> next;
-		free(node);
-	}
+	printf("%d ",	(*q) -> node_t -> value);
+	*q = (*q) -> next;
+	free(tmp);
 }
 
-tree_t	*find_node(tree_t *t, int node)
+queue_t	*createQueue(tree_t *t)
+{
+	queue_t	*q = malloc(sizeof(queue_t));
+
+	q -> node_t = t;
+	q -> next = NULL;
+	return (q);
+}
+
+s_stack_t	*push(s_stack_t **s, int value)
+{
+	s_stack_t *node = malloc(sizeof(s_stack_t));
+
+	node -> value = value;
+	node -> next = *s;
+	return (node);
+}
+
+tree_t	*createTree(int value)
+{
+	tree_t	*t = malloc(sizeof(tree_t));
+
+	t -> value = value;
+	t -> level = 0;
+	t -> next_sibling = NULL;
+	t -> first_child = NULL;
+	return (t);
+}
+
+tree_t	*find_node(tree_t *t, int value)
 {
 	tree_t	*pos;
 
 	if (!t)
 		return (t);
-	if (t -> value == node)
+	if(t -> value == value)
 		return (t);
-	pos = find_node(t -> first_child, node);
-	if (!pos)
-		return (find_node(t -> next_sibling, node));
-	return (pos);
+	pos = find_node(t -> first_child, value);
+	if(!pos)
+		return (pos);
+	return (find_node(t -> next_sibling, value));
 }
 
-
-tree_t	*attach(tree_t *t, int parent, int child)
+tree_t	*find_parent(tree_t *t, tree_t *parent, int value)
 {
-	tree_t	*pos, *node;
+	tree_t *pos;
 
-	if (parent != -1 && !t)
+	if(!t)
 		return (NULL);
-	if (parent == -1 && !t)
+	if (t -> value == value)
+		return (parent);
+	pos = find_parent(t -> first_child, t, value);
+	if(!pos)
+		return (pos);
+	return (find_parent(t -> next_sibling, parent, value));
+}
+
+int	search(tree_t *t, int value)
+{
+	return (find_node(t, value) != NULL);
+}
+
+tree_t	*findPath(tree_t *t, s_stack_t **path, int value)
+{
+	tree_t	*pos;
+
+	if (!t)
+		return (t);
+	if (t -> value == value)
 	{
-		pos = malloc(sizeof(tree_t));
-		if (!pos)
-				return (NULL);
-		pos -> value = child;
-		pos -> next_sibling = NULL;
-		pos -> first_child = NULL;
+		*path = push(path, value);
+		return (t);
+	}
+	pos = findPath(t -> first_child, path, value);
+	if (pos)
+	{
+		*path = push(path, t -> value);
 		return (pos);
 	}
-	pos = find_node(t, parent);
-	if (!pos)
-		return (t);
-	node = malloc(sizeof(tree_t));
-	if (!tmp)
-		return (t);
-	node -> value = child;
-	node -> next_sibling = NULL;
-	node -> first_child = NULL;
+	return (findPath(t -> next_sibling, path, value));
+}
+
+int	depth(tree_t *t, int node)
+{
+	int		count = 0;
+	s_stack_t	*first_pos = NULL;
+	s_stack_t	*tmp = NULL;
+	tree_t		*end_pos = findPath(t, &first_pos, node);
+	
+	while (first_pos)
+	{
+		count++;
+		tmp = first_pos -> next;
+		free(first_pos);
+		first_pos = tmp;
+	}
+	return (count);
+}
+
+tree_t *attach(tree_t *t,int parent, int child)
+{
+	tree_t	*node = createTree(child);
+	if (parent == -1)
+		return (node);
+	tree_t *pos = find_node(t, parent);
+	node -> level = depth(t, parent) + 1;
 	if (!pos -> first_child)
-		pos -> first_child = tmp;
+		pos -> first_child = node;
 	else
 	{
 		pos = pos -> first_child;
 		while (pos -> next_sibling)
 			pos = pos -> next_sibling;
 		pos -> next_sibling = node;
-	}
+	}	
 	return (t);
-}
-
-/*
-tree_t	*detach(tree_t *t, int node)
-{
-
-}
-*/
-
-int	search(tree_t *t, int node)
-{
-	return (find_node(t, node) != NULL);
 }
 
 int	degree(tree_t *t, int node)
 {
-	int	count;
+	int	count = 0;
+	tree_t	*pos = find_node(t, node) -> first_child;
 
-	t = find_node(t, node);
-	if (!t)
-		return (0);
-	t = t -> first_child;
-	count = 0;
-	while (t)
+	while (pos)
 	{
 		count++;
-		t = t -> next_sibling;
+		pos = pos -> next_sibling;
 	}
 	return (count);
 }
 
 int	is_root(tree_t *t, int node)
 {
-	if (!t)
+	tree_t	*check = find_node(t, node);
+	
+	if (!check)
 		return (0);
-	if (t -> value == node)
+	if (!check -> level)
 		return (1);
 	return (0);
 }
 
 int	is_leaf(tree_t *t, int node)
 {
-	t = find_node(t, node);
-	if (!t)
+	tree_t	*pos = find_node(t, node); 
+	if (!pos)
 		return (0);
-	if (!t -> first_child)
+	if (!pos -> first_child)
 		return (1);
 	return (0);
 }
 
 void	siblings(tree_t *t, int node)
 {
-	tree_t	*first = t;
-	int		i = 1;
-
-	while (search(t, node))
+	tree_t	*pos = find_parent(t, NULL, node);
+	if (!pos)
+		pos = pos -> first_child;
+	while (pos)
 	{
-		if (t -> value == node)
-		{
-			while (first)
-			{
-				if (first -> value != node)
-				{
-					if (i)
-					{
-						printf("%d", first -> value);
-						i = 0;
-					}
-					else
-						printf(" %d", first -> value);
-				}
-				first = first -> next_sibling;
-			}
-			printf("\n");
-			t = NULL;
-		}
-		else if (search(t -> first_child, node))
-		{
-			t = t -> first_child;
-			first = t;
-		}
-		else
-			t = t -> next_sibling;
+		if(pos->value != node)
+			printf("%d ", pos->value);
+		pos = pos->next_sibling;
 	}
+	printf("\n");
 }
 
-/*
-int	depth(tree_t *t, int node)
-{
-
-}	
-*/
 
 void	print_path(tree_t *t, int start, int end)
 {
-	tree_t	*tmp = find_node(t, start);
-
-	t = tmp;
-	if (tmp && search(tmp, end))
+	s_stack_t	*path = NULL;
+	s_stack_t	*tmp = NULL;
+	tree_t		*endPos = findPath(find_node(t, start), &path, end);
+	while (path)
 	{
-		while (search(t, end))
-		{
-			if (tmp -> value == end)
-			{
-				printf("%d\n", end);
-				t = NULL;
-			}
-			else if (search(tmp -> first_child, end))
-			{
-				printf("%d ", tmp -> value);
-				tmp = tmp -> first_child;
-			}
-			else
-				tmp = tmp -> next_sibling;
-		}
+		printf("%d ", path -> value);
+		tmp = path -> next;
+		free(path);
+		path = tmp;
 	}
+	printf("\n");
 }
 
 int	path_length(tree_t *t, int start, int end)
 {
-	tree_t	*tmp = find_node(t, start);
-	int		count = 1;
-
-	if (!(tmp && search(tmp, end)))
-		return (0);
-	while (search(t, end))
+	int		count = 0;
+	s_stack_t	*path = NULL;
+	tree_t		*endPos = findPath(find_node(t, start), &path, end);
+	s_stack_t	*tmp = NULL;
+	
+	while (path)
 	{
-		if (tmp -> value == end)
-			t = NULL;
-		else if (search(tmp -> first_child, end))
-		{
-			count++;
-			tmp = tmp -> first_child;
-		}
-		else
-			tmp = tmp -> next_sibling;
+		count++;
+		tmp = path -> next;
+		free(path);
+		path = tmp;
 	}
 	return (count);
 }
 
 void	ancestor(tree_t *t, int node)
 {
-	if (t && search(t, node))
+	s_stack_t	*path = NULL;
+	s_stack_t	*tmp = NULL;
+	tree_t		*endPos = findPath(t, &path, node);
+	
+	while (path)
 	{
-		while (search(t, node))
-		{
-			if (t -> value == node)
-			{
-				printf("%d\n", node);
-				t = NULL;
-			}
-			else if (search(t -> first_child, node))
-			{
-				printf("%d ", t -> value);
-				t = t -> first_child;
-			}
-			else
-				t = t -> next_sibling;
-		}
+		printf("%d ", path -> value);
+		tmp = path -> next;
+		free(path);
+		path = tmp;
+	}
+	printf("\n");
+}
+
+void	destroy(tree_t *t)
+{
+	if(t)
+	{
+		destroy(t -> first_child);
+		destroy(t -> next_sibling);
+		free(t);
 	}
 }
 
-void	bfs(t)
+tree_t	*detach(tree_t *t, int node)
 {
+	tree_t	*dNode = find_node(t, node);
+	tree_t *pdNode = find_parent(t, NULL, node);
+	tree_t *tmp = NULL;
+	
+	if(pdNode)
+	{
+		if (pdNode -> first_child && pdNode -> first_child -> value != node)
+		{
+			pdNode = pdNode -> first_child;
+			while (pdNode != dNode)
+			{
+				tmp = pdNode;
+				pdNode = pdNode -> next_sibling;
+			}
+			tmp -> next_sibling = pdNode -> next_sibling;
+		}
+		else
+			pdNode -> first_child = dNode -> next_sibling;
+		dNode -> next_sibling = NULL;
+		destroy(dNode);
+	}
+	else
+	{
+		destroy(dNode);
+		t = NULL;
+	}
+	return (t);
+}
+
+void	dfs(tree_t *t)
+{
+	if (t)
+	{
+		printf("%d ",t -> value);
+		dfs(t -> first_child);
+		dfs(t -> next_sibling);
+		if (is_root(t,t -> value))
+			printf("\n");
+	}
+}
+
+void bfs(tree_t *t)
+{
+	tree_t	*check, *tmp;
+	queue_t	*qBfs;
+	
+	check = t;
+	if (check)
+	{
+		qBfs = createQueue(check);
+		while (qBfs)
+		{
+			if (!check -> next_sibling)
+				if (check -> first_child)
+				{
+					qBfs = enqueue(&qBfs, check -> first_child);
+					tmp = check -> first_child;
+					while (tmp)
+					{
+						tmp = tmp -> next_sibling;
+						if(tmp)
+							qBfs = enqueue(&qBfs, tmp);
+					}
+				}
+			dequeue(&qBfs);
+		}
+	}
+	else
+	{
+		if (check -> first_child)
+		{
+			qBfs = enqueue(&qBfs, check -> first_child);
+			tmp = check -> first_child;
+			while (tmp)
+			{
+				tmp = tmp -> next_sibling;
+				if (tmp)
+					qBfs = enqueue(&qBfs,tmp);
+			}
+		}
+		dequeue(&qBfs);
+	}
+	if(qBfs)
+		check = qBfs -> node_t;
+    printf("\n");
+}
+
+void descendant(tree_t *t, int node)
+{
+	tree_t	*pos = find_node(t, node);
+	bfs(pos);
+}
+
+void	print_tree(tree_t *t)
+{
+	if (t)
+	{
+		for (int i = 0; i < t -> level; i++)
+			printf("    ");
+	printf("%d\n",t->value);
+	print_tree(t->first_child);
+	print_tree(t->next_sibling);
+	}
 }
 
 int	main(void)
 {
-	tree_t	*t = NULL;		
-	int		n, i, command;
-	int		parent, child, node, start, end;
-
+	tree_t	*t = NULL;
+	int	n, i, command;
+	int	parent, child, node, start, end;
 	scanf("%d", &n);
 	for (i=0; i<n; i++)
 	{
 		scanf("%d", &command);
 		switch(command)
 		{
-			case 1:	scanf("%d %d", &parent, &child); t = attach(t, parent, child); break;
-			//case 2: scanf("%d", &node); t = detach(t, node); break;
+			case 1: scanf("%d %d", &parent, &child); t = attach(t, parent, child); break;
+			case 2: scanf("%d", &node); t = detach(t, node); break;
 			case 3: scanf("%d", &node); printf("%d\n", search(t, node)); break;
 			case 4: scanf("%d", &node); printf("%d\n", degree(t, node)); break;
 			case 5: scanf("%d", &node); printf("%d\n", is_root(t, node)); break;
 			case 6: scanf("%d", &node); printf("%d\n", is_leaf(t, node)); break;
 			case 7: scanf("%d", &node); siblings(t, node); break;
-			//case 8: scanf("%d", &node); printf("%d\n", depth(t, node)); break;
+			case 8: scanf("%d", &node); printf("%d\n", depth(t, node)); break;
 			case 9: scanf("%d %d", &start, &end); print_path(t, start, end); break;
-			case 10: scanf("%d %d", &start, &end); printf("%d\n", path_length(t, start, end)); break;
+			case 10: scanf("%d %d", &start, &end); printf("%d\n",path_length(t, start, end)); break;
 			case 11: scanf("%d", &node); ancestor(t, node); break;
-			//case 12: scanf("%d", &node); descendant(t, node); break;
-			//case 13: bfs(t); break;
-			//case 14: dfs(t); break;
-			//case 15: printree(t); break;
+			case 12: scanf("%d", &node); descendant(t, node); break;
+			case 13: bfs(t); break;
+			case 14: dfs(t); break;
+			case 15: print_tree(t); break;
 		}
 	}
-	return 0;
+	return (0);
 }
+
+// credit:	pichpeach
