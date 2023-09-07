@@ -35,3 +35,6 @@ ${NAME}:
 
 clean:
 	@${RM} ${OUT}
+
+enter:
+	ssh b6510503263@adt.mikelab.net -p 59921
