@@ -65,7 +65,7 @@ void	print_inorder(tree_t *t)
 {
 	if (t)
 	{
-		prinnt_inorder(t -> left);
+		print_inorder(t -> left);
 		printf(" %d", t -> data);
 		print_inorder(t -> right);
 		printf("\n");
