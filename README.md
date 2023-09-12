@@ -49,8 +49,13 @@
 
 ## [lab08](https://github.com/jirametoon/LAB-C-language/tree/main/lab08)
 
-- [binTreeTypes.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab07/binTreeTypes.c)
-- [binTreeOrder.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab07/binTreeOrder.c)
+- [binTreeTypes.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab08/binTreeTypes.c)
+- [binTreeOrder.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab08/binTreeOrder.c)
+
+## [lab09](https://github.com/jirametoon/LAB-C-language/tree/main/lab09)
+
+- [bsTree.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab09/bsTree.c)
+- [avlTree.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab09/avlTree.c)
 
 # Makefile
 
