@@ -57,6 +57,11 @@
 - [bsTree.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab09/bsTree.c)
 - [avlTree.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab09/avlTree.c)
 
+## [lab10](https://github.com/jirametoon/LAB-C-language/tree/main/lab10)
+
+- [priorityQueue.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab10/priorityQueue.c)
+- [wordEncoding.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab10/wordEncoding.c)
+
 # Makefile
 
 - [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
