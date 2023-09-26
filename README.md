@@ -62,6 +62,12 @@
 - [priorityQueue.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab10/priorityQueue.c)
 - [wordEncoding.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab10/wordEncoding.c)
 
+## [lab11](https://github.com/jirametoon/LAB-C-language/tree/main/lab11)
+
+- [hashTable1.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab11/hashTable1.c)
+- [hashTable2.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab11/hashTable2.c)
+- [simpleCache.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab11/simpleCache.c)
+
 # Makefile
 
 - [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
