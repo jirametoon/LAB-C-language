@@ -66,7 +66,7 @@
 
 - [hashTable1.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab11/hashTable1.c)
 - [hashTable2.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab11/hashTable2.c)
-- simpleCache.c // (https://github.com/jirametoon/LAB-C-language/blob/main/lab11/simpleCache.c)
+- simpleCache.c (not done yet)
 
 # Makefile
 
