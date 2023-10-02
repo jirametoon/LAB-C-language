@@ -24,7 +24,7 @@ hash_t	*init_hashtable(int m, int hash_key)
 	h = malloc(sizeof(hash_t));
 	if (!h)
 		return (NULL);
-	h -> table = malloc(sizeof(item_t *), m);
+	h -> table = calloc(sizeof(item_t *), m);
 	if (!h -> table)
 		return (NULL);
 	h -> size = m;
@@ -36,7 +36,7 @@ item_t	*insert_item(item_t *i, const char *text)
 {
 	item_t	*tmp;
 	
-	tmp = calloc(sizeof(item_t));
+	tmp = calloc(sizeof(item_t), 1);
 	if (!tmp)
 		return (NULL);
 	tmp -> text = strdup(text);
