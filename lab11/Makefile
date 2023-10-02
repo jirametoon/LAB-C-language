@@ -2,6 +2,8 @@
 
 SRCS	:= ${wildcard *.c}
 
+NAME	:= ${SRCS:%.c=%}
+
 CC	:= gcc
 
 RM	:= rm -rf
@@ -18,6 +20,13 @@ ${SRCS}:
 	@echo "Running $@ ..."
 	@${CC} ${CFLAGS} $@ -lm
 	@${RUN}
+	@${RM} ${OUT}
+	@echo "=============================="
+
+${NAME}:
+	@echo "Running ${@:%=%.c} ..."
+	@${CC} ${CFLAGS} ${@:%=%.c} -lm
+	@valgrind ${RUN}
 	@${RM} ${OUT}
 	@echo "=============================="
 
