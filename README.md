@@ -68,6 +68,11 @@
 - [hashTable2.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab11/hashTable2.c)
 - [simpleCache.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab11/simpleCache.c)
 
+## [lab12](https://github.com/jirametoon/LAB-C-language/tree/main/lab12)
+
+- [insertionSort.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab12/insertionSort.c)
+- [anagram.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab12/anagram.c)
+
 # Makefile
 
 - [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
