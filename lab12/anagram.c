@@ -2,156 +2,109 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct	s_list
-{
-	char			*content;
-	struct s_list	*next;
-}t_list;
+typedef	char	*t_word;
 
-typedef struct	s_table
+void	print_all(t_word *table)
 {
-	t_list	**table;
-	int		last_index;
-}t_table;
+	int	i = -1;
 
-t_table	*createTable(void)
-{
-	t_table	*table;
-
-	table = calloc(sizeof(t_table), 1);
 	if (!table)
-		return (NULL);
-	table->table = calloc(sizeof(t_list *), 1);
-	if (!table->table)
-		return (NULL);
-	return (table);
-}
-
-t_list	*createList(char *content)
-{
-	t_list	*node;
-
-	node = calloc(sizeof(t_list), 1);
-	if (!node)
-		return (NULL);
-	node->content = strdup(content);
-	if (!node->content)
-		return (NULL);
-	return (node);
-}
-
-void	add_list(t_list **lst, t_list *new)
-{
-	t_list	*node;
-
-	if (!new)
 		return ;
-	node = *lst;
-	if (node)
-	{
-		while (node->next)
-			node = node->next;
-		node->next = new;
-	}
-	else
-		*lst = new;
+	while (table[++i])
+		printf("table[%d] = %s\n", i, table[i]);
 }
 
-int	is_in_string(char c, char *content)
+char	*sort_char(char *str)
 {
-	for (size_t i = 0; i < strlen(content); i++)
-		if (c == content[i])
-			return (1);
+	char	*new;
+	char	c;
+
+	new = strdup(str);
+	if (!new)
+		return (NULL);
+	for (size_t i = 1; i < strlen(new); i++)
+	{
+		c = new[i];
+		for (size_t j = i; j > 0; j--)
+		{
+			if (c < new[j - 1])
+			{
+				new[j] = new[j - 1];
+				new[j - 1] = c;
+			}
+			else
+				break ;
+		}
+	}
+	return (new);
+}
+
+int	is_anagram(char *str, char *text)
+{
+	char	*tmp1; 
+	char	*tmp2;
+
+	tmp1 = sort_char(str);
+	tmp2 = sort_char(text);
+	if (!tmp1 || !tmp2)
+		return (0);
+	if (!strcmp(tmp1, tmp2))
+	{
+		free(tmp1);
+		free(tmp2);
+		return (1);
+	}
+	free(tmp1);
+	free(tmp2);
 	return (0);
 }
 
-int	is_word(char *content, t_list *lst)
+void	print_anagram(char *str, t_word *table)
 {
-	for (size_t i = 0; i < strlen(lst->content); i++)
-		if (!is_in_string(content[i], lst->content))
-			return (0);
-	return (1);
-}
-
-void	insert(t_table **table, char *content)
-{
-	t_list	*node;
-	int 	i;
+	int	i = 0;
 
 	if (!table)
 		return ;
-	if (!*table)
+	while (table[i])
 	{
-		node = createList(content);
-		if (!node)
-			return ;
-		(*table)->table[0] = node; 
-		(*table)->last_index++;
-	}
-	else
-	{
-		node = createList(content);
-		if (!node)
-			return ;
-		for (i = 0; i < (*table)->last_index; i++)
-			if (is_word(content, (*table)->table[i]))
-			{
-				add_list(&(*table)->table[i], node);
-				break ;
-			}
-		if (i == (*table)->last_index)
-		{
-			(*table)->table[(*table)->last_index] = node; 
-			(*table)->last_index++;
-		}
-	}
-}
-
-t_list	*find_word(t_table *table, char *content)
-{
-	for (int i = 0; i < table->last_index; i++)
-		if (is_word(content, table->table[i]))
-			return (table->table[i]);
-	return (NULL);
-}
-
-void	print(t_table *table, char *content)
-{
-	t_list	*lst;
-
-	if (!table)
-		return ;
-	lst = find_word(table, content);
-	if (lst)
-	{
-		printf("%s", lst->content);
-		lst = lst->next;	
-	}
-	while (lst)
-	{
-		printf(" %s", lst->content);
-		lst = lst->next;
+		if (is_anagram(str, table[i]))
+			printf("%s ", table[i]);
+		i++;
 	}
 	printf("\n");
 }
 
 int	main(void)
 {
-	int		m, n;
-	char	content[50];
-	t_table *table = NULL;
+	t_word	*table = NULL;
+	char	str[51], text[51];
+	int		m, n, k;
 
 	scanf("%d %d", &m, &n);
-	table = createTable();
+	table = calloc(sizeof(t_word), m + 1);
+	if (!table)
+		return (1);
+
+	// insert word
 	for (int i = 0; i < m; i++)
 	{
-		scanf("%s", content);
-		insert(&table, content);
+		scanf("%s", str);
+		table[i] = strdup(str);
 	}
+
+	//print_all(table);
+
+	// find anagram
 	for (int j = 0; j < n; j++)
 	{
-		scanf("%s", content);
-		print(table, content);
+		scanf("%s", text);
+		print_anagram(text, table);
 	}
+
+	// free
+	k = -1;
+	while (table[++k])
+		free(table[k]);
+	free(table);
 	return (0);
 }
