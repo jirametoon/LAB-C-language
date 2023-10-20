@@ -73,6 +73,11 @@
 - [insertionSort.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab12/insertionSort.c)
 - [anagram.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab12/anagram.c)
 
+## [lab13](https://github.com/jirametoon/LAB-C-language/tree/main/lab13)
+
+- [shortestPath.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab13/shortestPath.c)
+- [scc.c](https://github.com/jirametoon/LAB-C-language/blob/main/lab13/scc.c)
+
 # Makefile
 
 - [Makefile](https://github.com/jirametoon/LAB-C-language/blob/main/Makefile)
