@@ -3,21 +3,21 @@
 
 typedef struct	tree
 {
-	int		value;
-	int		level;
+	int			value;
+	int			level;
 	struct tree	*next_sibling;
-	struct tree 	*first_child;
+	struct tree *first_child;
 }tree_t;
 
-typedef struct	stack
+typedef struct		stack
 {
-	int 		value;
+	int 			value;
 	struct stack 	*next;
 }s_stack_t;
 
-typedef struct queue
+typedef struct 		queue
 {
-	tree_t		*node_t;
+	tree_t			*tree_node;
 	struct queue	*next;
 }queue_t;
 
@@ -25,8 +25,8 @@ queue_t	*enqueue(queue_t **q, tree_t *t)
 {
 	queue_t	*node = malloc(sizeof(queue_t));
 
-	node -> node_t = t;
-	node -> next = NULL;
+	node->tree_node = t;
+	node->next = NULL;
 	if (!*q)
 		return (node);
 	else
@@ -43,7 +43,7 @@ void	dequeue(queue_t **q)
 {
 	queue_t	*tmp = *q;
 
-	printf("%d ",	(*q) -> node_t -> value);
+	printf("%d ",	(*q) -> tree_node -> value);
 	*q = (*q) -> next;
 	free(tmp);
 }
@@ -52,7 +52,7 @@ queue_t	*createQueue(tree_t *t)
 {
 	queue_t	*q = malloc(sizeof(queue_t));
 
-	q -> node_t = t;
+	q -> tree_node = t;
 	q -> next = NULL;
 	return (q);
 }
@@ -358,7 +358,7 @@ void bfs(tree_t *t)
 		dequeue(&qBfs);
 	}
 	if(qBfs)
-		check = qBfs -> node_t;
+		check = qBfs -> tree_node;
     printf("\n");
 }
 
